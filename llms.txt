@@ -1,0 +1,27 @@
+# Şipşak Oto Lastik
+
+> Ankara Lastik Yol Yardım olarak da bilinir. 2020'den beri Ankara genelinde 7 gün 24 saat çalışan mobil lastikçi. Bulunduğunuz yere gelerek yerinde lastik değişimi, lastik tamiri, lastik satışı, lastik bakımı ve lastik yol yardımı yapar.
+
+## Temel bilgiler
+
+- İşletme adı: Şipşak Oto Lastik (Ankara Lastikçi · Ankara Oto Lastik)
+- Adres: İvedik Mahallesi 1323. Cadde No:2, Yenimahalle / Ankara
+- Telefon / WhatsApp: +90 532 153 09 14
+- Çalışma saatleri: Haftanın 7 günü, 24 saat (gece, hafta sonu ve bayramlar dahil)
+- Kuruluş: 2020
+- Hizmet bölgesi: Ankara geneli; başta Yenimahalle (İvedik, Ostim, Batıkent, Şentepe, Demetevler), Keçiören, Çankaya, Etimesgut, Sincan, Altındağ, Pursaklar, Gölbaşı
+- Hizmetler: Yerinde lastik değişimi, lastik tamiri, lastik satışı (yaz, kış, dört mevsim), lastik yol yardımı, lastik bakım ve kontrol
+- Web: https://ankaraotolastik724.com.tr/
+
+## Sayfalar
+
+- [Anasayfa](https://ankaraotolastik724.com.tr/): Hizmetler, süreç, hakkımızda, hizmet bölgeleri, sık sorulan sorular ve iletişim tek sayfada.
+- [Hizmetler](https://ankaraotolastik724.com.tr/#hizmetler): Lastik değişimi, tamiri, satışı, yol yardım ve bakım.
+- [Hakkımızda](https://ankaraotolastik724.com.tr/#hakkimizda): 2020'de kurulan mobil lastik servisi.
+- [Hizmet bölgeleri](https://ankaraotolastik724.com.tr/#bolgeler): Ankara ilçe ve semtleri.
+- [Sık sorulan sorular](https://ankaraotolastik724.com.tr/#sss): Gece hizmeti, varış süresi, tamir/değişim kararı, lastik ebadı, fiyat.
+- [İletişim](https://ankaraotolastik724.com.tr/#iletisim): Telefon, WhatsApp, adres ve talep formu.
+
+## Ek
+
+- [Tam içerik (llms-full.txt)](https://ankaraotolastik724.com.tr/llms-full.txt): Sitedeki metnin tamamı tek dosyada.
