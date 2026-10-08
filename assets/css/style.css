@@ -271,6 +271,7 @@ a.ccard:hover { border-color: var(--yellow); }
   .header__cta { display: none; }
   .nav { position: fixed; inset: 72px 0 auto 0; background: var(--navy); padding: 12px 16px 24px; border-top: 1px solid rgba(255,255,255,.1); transform: translateY(-120%); visibility: hidden; transition: transform .25s, visibility .25s; max-height: calc(100vh - 72px); overflow: auto; }
   .nav-open .nav { transform: none; visibility: visible; }
+  .nav-open .topbar { display: none; } /* menü 72px'ten açılır; şerit header'ı aşağı itmesin */
   .nav__list { flex-direction: column; }
   .nav__link { padding: 14px 8px; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,.08); border-radius: 0; }
   .nav__mobile-cta { display: grid; gap: 10px; margin-top: 18px; }
