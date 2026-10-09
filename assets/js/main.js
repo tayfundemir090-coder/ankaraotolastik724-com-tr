@@ -56,6 +56,27 @@
     });
   }
 
+  // GTM dönüşüm olayları: AntiClick ziyaretçiyi temiz onaylarsa gönderilir (bot tıklaması dönüşüm sayılmaz).
+  // AntiClick yüklenemezse olay yine gönderilir.
+  function pushClean(ev) {
+    window.dataLayer = window.dataLayer || [];
+    var ac = window.AntiClick;
+    if (ac && typeof ac.isClean === 'function') {
+      ac.isClean().then(function (ok) { if (ok) window.dataLayer.push(ev); });
+    } else {
+      window.dataLayer.push(ev);
+    }
+  }
+
+  // Arama / WhatsApp tıklamaları
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || a.getAttribute('data-cf-trap') === '1') return;
+    var href = a.getAttribute('href').toLowerCase();
+    if (href.indexOf('tel:') === 0) pushClean({ event: 'arama_tiklama' });
+    else if (href.indexOf('wa.me') > -1 || href.indexOf('whatsapp.com') > -1) pushClean({ event: 'whatsapp_tiklama' });
+  }, true);
+
   // Talep formu -> WhatsApp mesajı
   var form = document.getElementById('contactForm');
   if (form) {
@@ -76,8 +97,7 @@
       if (tel.length === 11 && tel.charAt(0) === '0') tel = tel.slice(1);
       var ev = { event: 'form_gonder', hizmet: data.get('hizmet') || '' };
       if (/^5\d{9}$/.test(tel)) ev.user_data = { phone_number: '+90' + tel };
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push(ev);
+      pushClean(ev);
       window.open('https://wa.me/905321530914?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
     });
   }
