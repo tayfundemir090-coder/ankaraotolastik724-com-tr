@@ -70,6 +70,14 @@
         'Lastik ebadı: ' + (data.get('ebat') || '-'),
         'Konum / açıklama: ' + (data.get('mesaj') || '-')
       ];
+      // GTM: Google Ads gelişmiş dönüşümleri için telefon E.164 biçiminde (+905xxxxxxxxx) gönderilir.
+      var tel = String(data.get('telefon') || '').replace(/\D/g, '');
+      if (tel.length === 12 && tel.indexOf('90') === 0) tel = tel.slice(2);
+      if (tel.length === 11 && tel.charAt(0) === '0') tel = tel.slice(1);
+      var ev = { event: 'form_gonder', hizmet: data.get('hizmet') || '' };
+      if (/^5\d{9}$/.test(tel)) ev.user_data = { phone_number: '+90' + tel };
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(ev);
       window.open('https://wa.me/905321530914?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
     });
   }
