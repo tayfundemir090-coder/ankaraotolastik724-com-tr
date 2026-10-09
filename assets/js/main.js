@@ -56,9 +56,19 @@
     });
   }
 
+  // Gerçek etkileşim izi: AntiClick sunucusundaki "sahte arama" kuralıyla aynı ölçüt
+  // (en az 3 sn sayfada kalma + fare/dokunma/kaydırma/klavye etkileşimi).
+  var loadedAt = Date.now();
+  var engaged = false;
+  ['mousemove', 'touchstart', 'scroll', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { engaged = true; }, { passive: true, once: true });
+  });
+
   // GTM dönüşüm olayları: AntiClick ziyaretçiyi temiz onaylarsa gönderilir (bot tıklaması dönüşüm sayılmaz).
-  // AntiClick yüklenemezse olay yine gönderilir.
-  function pushClean(ev) {
+  // AntiClick yüklenemezse olay yine gönderilir. Kod ile tetiklenen (isTrusted=false), sayfa açılır
+  // açılmaz ya da hiçbir etkileşim olmadan yapılan tıklamalar dönüşüm sayılmaz.
+  function pushClean(ev, domEvent) {
+    if (domEvent && (!domEvent.isTrusted || !engaged || Date.now() - loadedAt < 3000)) return;
     window.dataLayer = window.dataLayer || [];
     var ac = window.AntiClick;
     if (ac && typeof ac.isClean === 'function') {
@@ -73,8 +83,8 @@
     var a = e.target.closest && e.target.closest('a[href]');
     if (!a || a.getAttribute('data-cf-trap') === '1') return;
     var href = a.getAttribute('href').toLowerCase();
-    if (href.indexOf('tel:') === 0) pushClean({ event: 'arama_tiklama' });
-    else if (href.indexOf('wa.me') > -1 || href.indexOf('whatsapp.com') > -1) pushClean({ event: 'whatsapp_tiklama' });
+    if (href.indexOf('tel:') === 0) pushClean({ event: 'arama_tiklama' }, e);
+    else if (href.indexOf('wa.me') > -1 || href.indexOf('whatsapp.com') > -1) pushClean({ event: 'whatsapp_tiklama' }, e);
   }, true);
 
   // Talep formu -> WhatsApp mesajı
@@ -97,7 +107,7 @@
       if (tel.length === 11 && tel.charAt(0) === '0') tel = tel.slice(1);
       var ev = { event: 'form_gonder', hizmet: data.get('hizmet') || '' };
       if (/^5\d{9}$/.test(tel)) ev.user_data = { phone_number: '+90' + tel };
-      pushClean(ev);
+      pushClean(ev, e);
       window.open('https://wa.me/905321530914?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
     });
   }
